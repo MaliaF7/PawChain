@@ -6,6 +6,11 @@ from gymcoin import blockchainObj
 from flask_login import login_user, current_user, logout_user, login_required
 from Crypto.PublicKey import RSA
 import requests
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
+    
 #FLASK ROUTES 
 @app.route("/")
 @app.route("/home")
@@ -95,8 +100,6 @@ def logout():
 def account():
     return render_template('account.html', title='Account', blockchain = blockchainObj)
 
-
-
 #BLOCKCHAIN BACKEND REQUESTS
 @app.route('/mine', methods=['GET'])
 def mine():
@@ -170,5 +173,4 @@ def consensus():
         }
 
     return jsonify(response), 200
-
 
