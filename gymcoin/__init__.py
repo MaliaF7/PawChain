@@ -12,9 +12,9 @@ app = Flask(__name__);
 app.config['SECRET_KEY'] = 'Moe Lester wants to talk to you for a Titty Attack';
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db';
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False;
+db = SQLAlchemy(app);
 with app.app_context():
-  db = SQLAlchemy(app);
-db.create_all();
+  db.create_all();
 bcrypt = Bcrypt(app);
 loginManager = LoginManager(app);
 loginManager.login_view = 'login';
